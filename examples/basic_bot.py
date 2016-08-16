@@ -121,6 +121,11 @@ async def fantasy(*params : str):
 	await bot.say('http://i.imgur.com/EMSiUF3.jpg')	
 	
 @bot.command()
+async def sims(*params : str):
+	"""What happens after a Sim batch is completed"""
+	await bot.say('http://i.giphy.com/l2SpX1WV6tx8rT8Ws.gif')	
+	
+@bot.command()
 async def racial(*params : str):
 	"""Best racial for Legion"""
 	await bot.say('"Follow your :heart:"\n~Hygeiah 2016')		

@@ -1,10 +1,16 @@
 {
 	"item.invalid":"Invalid argument\nUsage:\n\t!item <spec> <slot>\n\t!item <itemNumber>",
 	"list.invalid":"Invalid argument\nUsage: !list <spec> <type>",
+<<<<<<< HEAD
 	"link.invalid":"Invalid argument\nUsage: !link <spec> [information]",
 	"stat.invalid":"Invalid argument\nUsage: !stats <spec> [subtype]",
     "wa.invalid":"Invalid argument\nUsage: !weakauras <spec> [author]",
 
+=======
+	"link.invalid":"Invalid argument\nUsage: !link <spec> <information>",
+	"stat.invalid":"Invalid argument\nUsage: !stats <spec> [subtype]",
+    "wa.invalid":"Invalid argument\nUsage: !weakauras <spec> [author]",
+>>>>>>> fb33011c483c9bdad25a6065d80090e065a6f238
     "bis.invalid":"Invalid argument\nUsage: !bis <spec> [subtype]",
     "boss.invalid":"Invalid argument\nUsage: !boss <spec> <bossName>",
 	"artifact.invalid":"Invalid argument\nUsage: !artifact <spec> <route>\nRoutes: first, second, full",

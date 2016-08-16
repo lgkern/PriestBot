@@ -13,6 +13,8 @@ Below you'll find my basic commands.
 You can find my full list of commands at https://github.com/lgkern/discord.py/blob/async/examples/dictEntries.txt'''
 bot = commands.Bot(command_prefix='!', description=description)
 
+client = discord.Client()
+
 @bot.event
 async def on_ready():
     print('Logged in as')
@@ -20,6 +22,16 @@ async def on_ready():
     print(bot.user.id)
     print('------')
 	
+@client.event
+async def on_message(message):
+    # we do not want the bot to reply to itself
+    if message.author == client.user:
+        return
+
+    if message.content.startswith('!hello'):
+        msg = 'Hello {0.author.mention}'.format(message)
+        await client.send_message(message.channel, msg)
+
 @bot.command()
 async def list(*params : str):
 	"""Lists of items"""

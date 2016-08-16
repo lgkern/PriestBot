@@ -18,7 +18,7 @@ class DictionaryReader:
 	
 	def readEntry(self, entry):
 		self.loop = self.loop + 1
-		if self.loop > 10
+		if self.loop > 10:
 			return "Loop error!\nLikely an issue with my dictionary database.\n*pokes* @Anshlun#1497 Fix me! "
 		fixed = self.fixEntry(entry)
 		print(fixed)

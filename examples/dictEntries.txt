@@ -88,10 +88,8 @@
 	"wa.shadow.twintop":"http://howtopriest.com/viewtopic.php?f=104&t=8339",
 	
 	
-	"discord":"Death Knight: https://discord.gg/0ez1cFfUH3ingV96\nDemon Hunter: https://discord.gg/0enuZ4FBFluNZH1r\nDruid: https://discord.gg/0dWu0WkuetF87H9H\nPaladin: https://discord.gg/0dvRDgpa5xZHFfnD\nPriest: https://discord.gg/0f1Ta8lT8xXXEAIY\nRogue: https://discord.gg/0h08tydxoNhfDVZf\nShaman: https://discord.gg/0VcupJEQX0JmBCcC\nMage: https://discord.gg/0gLMHikX2aZ23VdA\nMonk: https://discord.gg/0dkfBMAxzTmggsPH\nWarlock: https://discord.gg/0onXDymd9Wpc2CEu\nWarrior: https://discord.gg/0pYY7932lTH4FHW6",
-	
-	"discord.invalid":"Invalid class",
-	
+	"discord":"Invalid Argument\nUsage: !discord <class>",	
+	"discord.invalid":"discord",	
 	"discord.death.knight":" https://discord.gg/0ez1cFfUH3ingV96",
 	"discord.demon.hunter":"https://discord.gg/0enuZ4FBFluNZH1r",
 	"discord.druid":"https://discord.gg/0dWu0WkuetF87H9H",

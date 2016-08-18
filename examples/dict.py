@@ -22,6 +22,9 @@ class DictionaryReader:
 	def roles(self):
 		return self.dictionary["roles"]
 
+	def admins(self):
+		return self.dictionary["authorized"]
+
 	def readEntry(self, entry):
 		self.loop = self.loop + 1
 		if self.loop > 10:
@@ -77,6 +80,11 @@ class DictionaryReader:
 				result = result.replace("disc","discipline",1)
 		
 		result = result.replace("pub.","",1)
+
+		#Aliases
+		result = result.replace("weakauras","wa",1)
+		if "link" not in result:
+			result = result.replace("lexicon","link.lexicon",1)
 	
 		return result
 		

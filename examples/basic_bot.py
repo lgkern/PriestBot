@@ -32,14 +32,17 @@ async def on_message(message):
 	if message.author == client.user:
 		return
 	if message.content.startswith('!'):
+		p = DictionaryReader()
 		if message.content.startswith('!fullupdate'):
+			if message.author.id not in p.admins():
+				await client.send_message(message.channel, 'You\'re not my dad, {0.mention}!'.format(message.author))
+				return
 			call(["git","pull"])
 			call(["cmdhere.bat"])
 			sys.exit()
 		elif message.content.startswith('!update'):
 			call(["git","pull"])
 		elif message.content.startswith('!send'):
-			p = DictionaryReader()
 			roles = message.author.roles
 			canSend = False
 			for role in roles:

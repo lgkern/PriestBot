@@ -1,4 +1,7 @@
 {
+	"whisper":"artifact list item link stat bis discord wa",
+	"roles":"Staff",
+
 	"item.invalid":"Invalid argument\nUsage:\n\t!item <spec> <slot>\n\t!item <itemNumber>",
 	"list.invalid":"Invalid argument\nUsage: !list <spec> <type>",
 	"link.invalid":"Invalid argument\nUsage: !link <spec> [information]",
@@ -11,6 +14,15 @@
     "bis.invalid":"Invalid argument\nUsage: !bis <spec> [subtype]",
     "boss.invalid":"Invalid argument\nUsage: !boss <spec> <bossName>",
 	"artifact.invalid":"Invalid argument\nUsage: !artifact <spec> <route>\nRoutes: first, second, full",
+
+	"shame":"http://i.imgur.com/FidZknJ.gif",		
+	"power":"http://i.imgur.com/8Igah2t.png",
+	"decent":"Here is Twintop's best StM to date:\nhttps://puu.sh/qgWCQ/f565207eb0.jpg",
+	"racial":"\"Follow your :heart:\"\n~Hygeia 2016",	
+	"fantasy":"http://i.imgur.com/EMSiUF3.jpg",
+	"sims":"stm",
+	"stm":"http://i.giphy.com/l2SpX1WV6tx8rT8Ws.gif",
+	
 
 	"item.legendary.shadow.shoulder":"item.shadow.shoulder",
 	"item.shadow.shoulder":"https://legion.wowhead.com/item=132437",

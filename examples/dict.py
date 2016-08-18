@@ -15,11 +15,18 @@ class DictionaryReader:
 				self.dictionary = json.loads(s)
 		except Exception:
 			return
+
+	def whisperCommands(self):
+		return self.dictionary["whisper"]
 	
+	def roles(self):
+		return self.dictionary["roles"]
+
 	def readEntry(self, entry):
 		self.loop = self.loop + 1
 		if self.loop > 10:
-			return "Loop error!\nLikely an issue with my dictionary database.\n*pokes* @Anshlun#1497 Fix me! "
+			print("Loop error")
+			return None
 		fixed = self.fixEntry(entry)
 		print(fixed)
 		if fixed in self.dictionary:
@@ -29,8 +36,8 @@ class DictionaryReader:
 		else:
 			print(entry.split('.')[0]+".invalid")
 			return self.readEntry(entry.split('.')[0]+".invalid")
-            
-            
+
+
 			
 	def fixEntry(self, entry):
 		result = entry.lower()
@@ -68,14 +75,18 @@ class DictionaryReader:
 		if "ord" not in result:
 			if "discipline" not in result:
 				result = result.replace("disc","discipline",1)
+		
+		result = result.replace("pub.","",1)
+	
 		return result
 		
 	def commandReader(self, params):
-		return self.readEntry('.'.join(params))
-    
+		return self.readEntry('.'.join(params.split(' ')))
+
 	def itemReader(self, params):
 		result = self.commandReader(params)
 		if 'Invalid' in result:
-			if params[1].isdigit():
-				return 'https://legion.wowhead.com/item='+params[1]
+			itemId = params.split(' ')[1]
+			if itemId.isdigit():
+				return 'https://wowhead.com/item='+itemId
 		return result

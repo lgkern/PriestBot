@@ -12,3 +12,5 @@ docs/_build
 botkey.py
 cmdhere.bat
 *.bat
+.vs
+*.pyproj

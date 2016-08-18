@@ -1,10 +1,14 @@
 import discord
+from discord import Forbidden
 from discord.ext import commands
 import random
 from dict import DictionaryReader
 from botkey import Key
 from subprocess import call
 import sys
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 description = '''I'm PriestBot, your robot friend for links and quick info!
 
@@ -15,145 +19,64 @@ bot = commands.Bot(command_prefix='!', description=description)
 
 client = discord.Client()
 
-@bot.event
+@client.event
 async def on_ready():
     print('Logged in as')
-    print(bot.user.name)
-    print(bot.user.id)
+    print(client.user.name)
+    print(client.user.id)
     print('------')
-	
+
 @client.event
 async def on_message(message):
     # we do not want the bot to reply to itself
-    if message.author == client.user:
-        return
+	if message.author == client.user:
+		return
+	if message.content.startswith('!'):
+		if message.content.startswith('!fullupdate'):
+			call(["git","pull"])
+			call(["cmdhere.bat"])
+			sys.exit()
+		elif message.content.startswith('!update'):
+			call(["git","pull"])
+		elif message.content.startswith('!send'):
+			p = DictionaryReader()
+			roles = message.author.roles
+			canSend = False
+			for role in roles:
+				canSend = canSend or (role.name in p.roles())
+			if not canSend:
+				print('{0.author.name} can\'t send whispers'.format(message))
+				return
+			entries = message.content.split(' ')
+			target = message.mentions[0]
+			if target != None:
+				entry = ' '.join(entries[2::])
+				msg = p.commandReader(entry)
+				if msg != None:
+					await client.send_message(target, msg)
+					try:
+						client.delete_message(message)	
+					except Exception:
+						client.send_message(message.channel, 'Can\'t delete shi... stuff here')
+					await client.send_message(message.author, 'Message sent to {0.mention}'.format(target))
+				else:
+					await client.send_message(message.channel, 'Invalid Message, {0.mention}'.format(message.author))
+		elif message.content.startswith('!item'):
+			p = DictionaryReader()
+			msg = p.itemReader(message.content[1::])
+			await client.send_message(message.channel, msg)
+		else:
+			command = message.content[1::].split(' ')[0]
+			p = DictionaryReader()
+			msg = p.commandReader(message.content[1::])
+			if msg != None:
+				if command in p.whisperCommands():
+					await client.send_message(message.author, msg)
+					client.delete_message(message)
+				else:
+					await client.send_message(message.channel, msg)
+			#msg = 'Hello {0.author.mention}'.format(message)
 
-    if message.content.startswith('!hello'):
-        msg = 'Hello {0.author.mention}'.format(message)
-        await client.send_message(message.channel, msg)
-
-@bot.command()
-async def list(*params : str):
-	"""Lists of items"""
-	p = DictionaryReader()
-	s = p.commandReader(('list',) + params)
-	if s != 'None':
-		await bot.say(s)
-		
-@bot.command()
-async def item(*params : str):
-	"""Direct link to different items"""
-	p = DictionaryReader()
-	s = p.itemReader(('item',) + params)
-	if s != 'None':
-		await bot.say(s)
-		
-@bot.command()
-async def link(*params : str):
-	"""Useful website/forum links"""
-	p = DictionaryReader()
-	s = p.commandReader(('link',) + params)
-	if s != 'None':
-		await bot.say(s)
-		
-@bot.command()
-async def stats(*params : str):
-	"""Stat weights"""
-	p = DictionaryReader()
-	s = p.commandReader(('stat',) + params)
-	if s != 'None':
-		await bot.say(s)
-        
-@bot.command()
-async def weakauras(*params : str):
-	"""Links for WeakAuras"""
-	p = DictionaryReader()
-	s = p.commandReader(('wa',) + params)
-	if s != 'None':
-		await bot.say(s)
-		
-@bot.command()
-async def wa(*params : str):
-	"""Links for WeakAuras"""
-	p = DictionaryReader()
-	s = p.commandReader(('wa',) + params)
-	if s != 'None':
-		await bot.say(s)
-        
-@bot.command()
-async def bis(*params : str):
-	"""Links for Best in Slot lists"""
-	p = DictionaryReader()
-	s = p.commandReader(('bis',) + params)
-	if s != 'None':
-		await bot.say(s)
-		
-@bot.command()
-async def discord(*params : str):
-	"""Links for all class Discords"""
-	p = DictionaryReader()
-	s = p.commandReader(('discord',) + params)
-	if s != 'None':
-		await bot.say(s)
-		
-@bot.command()
-async def shame(*params : str):
-	"""Shame on you!"""
-	await bot.say('http://i.imgur.com/FidZknJ.gif')
-	
-@bot.command()
-async def power(*params : str):
-	"""Don't underestimate it!"""
-	await bot.say('http://i.imgur.com/8Igah2t.png')
-		
-@bot.command()
-async def boss(*params : str):
-	"""Links for Boss Discussions"""
-	p = DictionaryReader()
-	s = p.commandReader(('boss',) + params)
-	if s != 'None':
-		await bot.say(s)
-
-@bot.command()
-async def artifact(*params : str):
-	"""Useful info on Artifacts"""
-	p = DictionaryReader()
-	s = p.commandReader(('artifact',) + params)
-	if s != 'None':
-		await bot.say(s)		
-		
-@bot.command()
-async def decent(*params : str):
-	"""Best Voidform NA"""
-	await bot.say('Here is Twintop\'s best StM to date:\nhttps://puu.sh/qgWCQ/f565207eb0.jpg')		
-	
-@bot.command()
-async def fantasy(*params : str):
-	"""Can you feel it?"""
-	await bot.say('http://i.imgur.com/EMSiUF3.jpg')	
-	
-@bot.command()
-async def sims(*params : str):
-	"""What happens after a Sim batch is completed"""
-	await bot.say('http://i.giphy.com/l2SpX1WV6tx8rT8Ws.gif')	
-	
-@bot.command()
-async def racial(*params : str):
-	"""Best racial for Legion"""
-	await bot.say('"Follow your :heart:"\n~Hygeiah 2016')		
-	
-@bot.command()
-async def update():
-	"""Update the bot link database to the most recent one"""
-	call(["git","pull"])
-
-@bot.command()
-async def fullUpdate():
-	"""Fully updates the bot's code"""
-	call(["git","pull"])
-	call(["cmdhere.bat"])
-	sys.exit();
-	
-
-bot.run(Key().value())
+client.run(Key().value())
+#bot.run(Key().value())
 

@@ -54,10 +54,7 @@ async def on_message(message):
 				msg = p.commandReader(entry)
 				if msg != None:
 					await client.send_message(target, msg)
-					try:
-						client.delete_message(message)	
-					except Exception:
-						client.send_message(message.channel, 'Can\'t delete shi... stuff here')
+					await client.delete_message(message)	
 					await client.send_message(message.author, 'Message sent to {0.mention}'.format(target))
 				else:
 					await client.send_message(message.channel, 'Invalid Message, {0.mention}'.format(message.author))
@@ -72,7 +69,7 @@ async def on_message(message):
 			if msg != None:
 				if command in p.whisperCommands():
 					await client.send_message(message.author, msg)
-					client.delete_message(message)
+					await client.delete_message(message)
 				else:
 					await client.send_message(message.channel, msg)
 			#msg = 'Hello {0.author.mention}'.format(message)
